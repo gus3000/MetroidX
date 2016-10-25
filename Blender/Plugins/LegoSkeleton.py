@@ -61,7 +61,7 @@ class LegoSkeletonCreator(bpy.types.Operator):
         
         self.handle_arm(amt,bone,isLeft)
     
-    def handle_arm(self, amt, shoulder, isLeft):
+    def handle_arm(self, amt, shoulder, isLeft): #TODO better positioning
         bone = amt.edit_bones.new('Arm' + ((isLeft and 'L') or 'R'))
         bone.use_connect = True
         bone.parent = shoulder
@@ -98,6 +98,42 @@ class LegoSkeletonCreator(bpy.types.Operator):
         tz=-1.3
         bone.tail = ((isLeft and tx) or -tx,0,tz)
 
+    def handle_constraints(self, bone):
+        locConst = bone.constraints.new('LIMIT_LOCATION')
+        rotConst = bone.constraints.new('LIMIT_ROTATION')
+        locConst.owner_space = 'LOCAL'
+        rotConst.owner_space = 'LOCAL'
+        
+        s = bone.name
+                
+        #locConst.min_x = locConst.min_y = locConst.min_z = 0
+        #locConst.max_x = locConst.max_y = locConst.max_z = 0
+        locConst.use_min_x = locConst.use_min_y = locConst.use_min_z = True
+        locConst.use_max_x = locConst.use_max_y = locConst.use_max_z = True
+        
+        #rotConst.min_x = rotConst.min_y = rotConst.min_z = 0
+        #rotConst.max_x = rotConst.max_y = rotConst.max_z = 0
+        rotConst.use_limit_x = rotConst.use_limit_y = rotConst.use_limit_z = True
+        
+        
+        if s == "Torso":
+            locConst.use_min_x = locConst.use_min_y = locConst.use_min_z = False
+            locConst.use_max_x = locConst.use_max_y = locConst.use_max_z = False
+            rotConst.use_limit_x = rotConst.use_limit_y = rotConst.use_limit_z = False
+        elif s == "Head":
+            rotConst.use_limit_y = False
+        elif s == "ShoulderL" or s == "ShoulderR":
+            pass
+        elif s == "ArmL" or s == "ArmR":
+            rotConst.use_limit_y = False
+        elif s == "HandL" or s == "HandR":
+            rotConst.use_limit_y = False
+        elif s == "LegL" or s == "LegR":
+            rotConst.use_limit_x = False
+        else:
+            print('Error, bone name "'+ s +'" not recognized')
+        
+
     def rig(self, pieces, amt):
         bpy.ops.object.mode_set(mode='EDIT')
         amtObject = bpy.data.objects[amtName]
@@ -129,16 +165,31 @@ class LegoSkeletonCreator(bpy.types.Operator):
             mod.object = amtObject
 
             name = nearest_bone.name
-            print(o.vertex_groups)
+            
+            #putting full weight for each object
+            #print(o.vertex_groups)
             if not name in o.vertex_groups:
                 group = o.vertex_groups.new(name)
             else:
                 group = o.vertex_groups[name]
             
-            
             vertCount = len(o.data.vertices)
             allVertices = range(vertCount)
             group.add(allVertices,1,"ADD")
+            
+        #adding bone constraints
+        bpy.ops.object.mode_set(mode='OBJECT')
+        bpy.ops.object.select_all(action='DESELECT')
+        amtObject.select = True
+        bpy.context.scene.objects.active = amtObject
+        bpy.ops.object.mode_set(mode='POSE')
+        
+        for bone in amtObject.pose.bones:
+            bone.bone.select = True
+            amt.bones.active = bone.bone
+            self.handle_constraints(bone)            
+        
+        bpy.ops.object.mode_set(mode='EDIT')
         
 
     def execute(self, context):
