@@ -55,20 +55,20 @@ class LegoSkeletonCreator(bpy.types.Operator):
         bone.parent = torso
         
         bone.head = torso.tail
-        x=0.472
-        z=1.068
+        x=0.443
+        z=1.122
         bone.tail = ((isLeft and x) or -x,0,z)
         
         self.handle_arm(amt,bone,isLeft)
     
-    def handle_arm(self, amt, shoulder, isLeft): #TODO better positioning
+    def handle_arm(self, amt, shoulder, isLeft):
         bone = amt.edit_bones.new('Arm' + ((isLeft and 'L') or 'R'))
         bone.use_connect = True
         bone.parent = shoulder
         
         bone.head = shoulder.tail
-        x = 0.8
-        z = 1.125
+        x = 0.771
+        z = 1.179
         bone.tail = ((isLeft and x) or -x,0,z)
         self.handle_hand(amt,bone,isLeft)
         
@@ -76,14 +76,14 @@ class LegoSkeletonCreator(bpy.types.Operator):
         bone = amt.edit_bones.new('Hand' + ((isLeft and 'L') or 'R'))
         bone.parent = arm
         
-        hx = 0.85
-        hy = 0
-        hz = 0.8
+        hx = 0.882
+        hy = -0.014
+        hz = 0.82
         bone.head = ((isLeft and hx) or -hx,hy,hz)
         
-        tx = 0.924
-        ty = -0.4
-        tz = 0.4
+        tx = 0.956
+        ty = -0.414
+        tz = 0.42
         bone.tail = ((isLeft and tx) or -tx,ty,tz)
         
     def handle_leg(self, amt, torso, isLeft):
