@@ -15,6 +15,8 @@ ModelImporter:
     100014: Outside_001
     100016: HandleLeft_001
     100018: HandleLeft_002
+    100020: Bottom
+    100022: Top
     400000: //RootNode
     400002: Cube
     400004: Cube_001
@@ -25,6 +27,8 @@ ModelImporter:
     400014: Outside_001
     400016: HandleLeft_001
     400018: HandleLeft_002
+    400020: Bottom
+    400022: Top
     2300000: //RootNode
     2300002: Cube
     2300004: Cube_001
@@ -35,6 +39,8 @@ ModelImporter:
     2300014: Outside_001
     2300016: HandleLeft_001
     2300018: HandleLeft_002
+    2300020: Bottom
+    2300022: Top
     3300000: //RootNode
     3300002: Cube
     3300004: Cube_001
@@ -45,6 +51,8 @@ ModelImporter:
     3300014: Outside_001
     3300016: HandleLeft_001
     3300018: HandleLeft_002
+    3300020: Bottom
+    3300022: Top
     4300000: Cube
     4300002: Cube_001
     4300004: Inside
@@ -54,6 +62,8 @@ ModelImporter:
     4300012: Outside
     4300014: HandleLeft_002
     4300016: HandleLeft_001
+    4300018: Top
+    4300020: Bottom
     7400000: Default Take
     9500000: //RootNode
   materials:
