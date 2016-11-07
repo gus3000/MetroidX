@@ -6,10 +6,54 @@ ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Cube
+    100004: Cube_001
+    100006: Inside
+    100008: HandleLeft
+    100010: HandleRight
+    100012: Outside
+    100014: Outside_001
+    100016: HandleLeft_001
+    100018: HandleLeft_002
     400000: //RootNode
+    400002: Cube
+    400004: Cube_001
+    400006: Inside
+    400008: HandleLeft
+    400010: HandleRight
+    400012: Outside
+    400014: Outside_001
+    400016: HandleLeft_001
+    400018: HandleLeft_002
     2300000: //RootNode
+    2300002: Cube
+    2300004: Cube_001
+    2300006: Inside
+    2300008: HandleLeft
+    2300010: HandleRight
+    2300012: Outside
+    2300014: Outside_001
+    2300016: HandleLeft_001
+    2300018: HandleLeft_002
     3300000: //RootNode
+    3300002: Cube
+    3300004: Cube_001
+    3300006: Inside
+    3300008: HandleLeft
+    3300010: HandleRight
+    3300012: Outside
+    3300014: Outside_001
+    3300016: HandleLeft_001
+    3300018: HandleLeft_002
     4300000: Cube
+    4300002: Cube_001
+    4300004: Inside
+    4300006: Outside_001
+    4300008: HandleRight
+    4300010: HandleLeft
+    4300012: Outside
+    4300014: HandleLeft_002
+    4300016: HandleLeft_001
     7400000: Default Take
     9500000: //RootNode
   materials:
